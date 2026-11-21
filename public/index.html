@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kingdom Sounds AI</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #080d1c;
+    color: #ffffff;
+}
+
+header {
+    padding: 20px;
+    background: #101a33;
+    border-bottom: 1px solid #c9a227;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: bold;
+    color: #f0c75e;
+}
+
+.logo span {
+    color: white;
+}
+
+.menu {
+    color: #f0c75e;
+    font-size: 14px;
+}
+
+.hero {
+    text-align: center;
+    padding: 35px 20px 25px;
+}
+
+.hero h1 {
+    font-size: 29px;
+    margin-bottom: 12px;
+}
+
+.hero h1 span {
+    color: #e8bd50;
+}
+
+.hero p {
+    color: #b8c2d8;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.container {
+    max-width: 650px;
+    margin: auto;
+    padding: 15px;
+}
+
+.card {
+    background: #111a30;
+    border: 1px solid #263452;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    color: #edc75c;
+    font-size: 19px;
+    margin-bottom: 18px;
+}
+
+label {
+    display: block;
+    margin: 17px 0 9px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+textarea, select {
+    width: 100%;
+    padding: 14px;
+    background: #080e1d;
+    border: 1px solid #34415d;
+    border-radius: 10px;
+    color: white;
+    outline: none;
+    font-size: 14px;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 110px;
+}
+
+textarea:focus, select:focus {
+    border-color: #d8b344;
+}
+
+textarea::placeholder {
+    color: #8490a8;
+}
+
+.mode-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.mode {
+    padding: 14px 10px;
+    border: 1px solid #34415d;
+    border-radius: 10px;
+    background: #0b1223;
+    text-align: center;
+    color: #dbe3f3;
+    cursor: pointer;
+}
+
+.mode.active {
+    border-color: #d8b344;
+    background: #24233a;
+    color: #f0c75e;
+}
+
+.generate-btn {
+    width: 100%;
+    padding: 16px;
+    margin-top: 22px;
+    background: linear-gradient(135deg, #d8b344, #f6df91);
+    color: #101629;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.generate-btn:active {
+    transform: scale(0.98);
+}
+
+.note {
+    text-align: center;
+    font-size: 12px;
+    color: #8793ab;
+    margin-top: 12px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 15px;
+    color: #7f8ba3;
+    font-size: 12px;
+}
+
+footer span {
+    color: #d8b344;
+}
+
+@media (min-width: 600px) {
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .container {
+        padding: 25px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">👑 KINGDOM <span>SOUNDS AI</span></div>
+    <div class="menu">STUDIO</div>
+</header>
+
+<section class="hero">
+    <h1>Where Scripture Meets <span>Melody</span></h1>
+    <p>Create worship, praise, hymns and inspirational music<br>
+    with the power of AI.</p>
+</section>
+
+<main class="container">
+
+    <div class="card">
+        <h2>🎵 Create Your Music</h2>
+
+        <label>Choose Creation Mode</label>
+
+        <div class="mode-grid">
+            <div class="mode active" onclick="setMode(this, 'song')">
+                🎼 Full Song
+            </div>
+
+            <div class="mode" onclick="setMode(this, 'instrumental')">
+                🎹 Instrumental
+            </div>
+
+            <div class="mode" onclick="setMode(this, 'scripture')">
+                📖 Scripture to Song
+            </div>
+
+            <div class="mode" onclick="setMode(this, 'lyrics')">
+                ✍️ My Lyrics
+            </div>
+        </div>
+
+        <label for="prompt">Describe the song you want</label>
+
+        <textarea id="prompt" placeholder="Example: A powerful worship song about God's faithfulness, with soft piano, deep worship vocals, African gospel atmosphere and a heavenly choir..."></textarea>
+
+        <label for="lyrics">Your Lyrics (Optional)</label>
+
+        <textarea id="lyrics" placeholder="Write or paste your lyrics here..."></textarea>
+
+        <label for="vocal">Vocal Style</label>
+
+        <select id="vocal">
+            <option>Male Vocal</option>
+            <option>Female Vocal</option>
+            <option>Male and Female Duet</option>
+            <option>Choir</option>
+            <option>No Vocals</option>
+        </select>
+
+        <label for="genre">Musical Style</label>
+
+        <select id="genre">
+            <option>Contemporary Worship</option>
+            <option>African Gospel</option>
+            <option>Traditional Hymn</option>
+            <option>Orchestral Worship</option>
+            <option>Acoustic Worship</option>
+            <option>Afro Gospel</option>
+            <option>Prayer and Soaking Music</option>
+            <option>Contemporary Christian</option>
+        </select>
+
+        <label for="duration">Song Duration</label>
+
+        <select id="duration">
+            <option value="30">30 Seconds</option>
+            <option value="60">1 Minute</option>
+            <option value="120">2 Minutes</option>
+            <option value="180">3 Minutes</option>
+        </select>
+
+        <button class="generate-btn" onclick="generateSong()">
+            ✨ Generate My Music
+        </button>
+
+        <p class="note">Your creativity. Your faith. Your sound.</p>
+    </div>
+
+</main>
+
+<footer>
+    <span> KINGDOM SOUNDS AI </span><br><br>
+    Where Scripture Meets Melody 🎵
+</footer>
+
+<script>
+let currentMode = "song";
+
+function setMode(element, mode) {
+    document.querySelectorAll(".mode").forEach(function(item) {
+        item.classList.remove("active");
+    });
+
+    element.classList.add("active");
+    currentMode = mode;
+
+    const prompt = document.getElementById("prompt");
+
+    if (mode === "instrumental") {
+        prompt.placeholder =
+        "Describe the instruments, mood and atmosphere...";
+    }
+
+    else if (mode === "scripture") {
+        prompt.placeholder =
+        "Enter a Bible passage and describe the musical feeling...";
+    }
+
+    else if (mode === "lyrics") {
+        prompt.placeholder =
+        "Describe how you want your lyrics turned into a song...";
+    }
+
+    else {
+        prompt.placeholder =
+        "Describe the song you want...";
+    }
+}
+
+async function generateSong() {
+    const prompt = document.getElementById("prompt").value;
+    const lyrics = document.getElementById("lyrics").value;
+    const vocal = document.getElementById("vocal").value;
+    const genre = document.getElementById("genre").value;
+    const durationSeconds = Number(document.getElementById("duration").value);
+
+    if (!prompt.trim() && !lyrics.trim()) {
+        alert("Please describe your song or enter your lyrics first.");
+        return;
+    }
+
+    const button = document.querySelector(".generate-btn");
+    let status = document.getElementById("generationStatus");
+
+    if (!status) {
+        status = document.createElement("div");
+        status.id = "generationStatus";
+        button.insertAdjacentElement("afterend", status);
+    }
+
+    button.disabled = true;
+    status.textContent = "Preparing your music request...";
+
+    const musicPrompt = [
+        prompt,
+        lyrics ? "Lyrics: " + lyrics : "",
+        "Creation mode: " + currentMode,
+        "Vocal: " + vocal,
+        "Music style: " + genre
+    ].filter(Boolean).join("\n");
+
+    try {
+        status.textContent = "Generating your music. Please wait...";
+
+        const response = await fetch("/api/generate", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ prompt: musicPrompt, durationSeconds })
+        });
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || "Music generation failed.");
+        }
+
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+
+        status.textContent = "Your music is ready!";
+
+        const audio = document.createElement("audio");
+        audio.controls = true;
+        audio.src = audioUrl;
+        status.appendChild(audio);
+
+        const download = document.createElement("a");
+        download.href = audioUrl;
+        download.download = "kingdom-song.mp3";
+        download.textContent = "Download Your Song";
+        status.appendChild(download);
+
+    } catch (error) {
+        status.textContent = "Error: " + error.message;
+    } finally {
+        button.disabled = false;
+    }
+}
+</script>
+
+</body>
+</html>
