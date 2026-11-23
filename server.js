@@ -10,9 +10,8 @@ app.use(cors());
 app.use(express.json());
 app.use(express.static("public"));
 app.get("/", (req, res) => {
-    res.send("Welcome to Kingdom Sounds AI!");
+    res.sendFile(__dirname + "/public/index.html");
 });
-
 app.get("/api/health", (req, res) => {
     res.json({
         project: "Kingdom Sounds AI",
