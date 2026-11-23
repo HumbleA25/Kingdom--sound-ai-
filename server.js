@@ -92,8 +92,10 @@ app.post("/api/generate", async (req, res) => {
     }
 });
 
-app.listen(PORT, () => {
-    console.log(
-        `Kingdom Sounds AI running on port ${PORT}`
-    );
-});
+if (require.main === module) {
+    app.listen(PORT, () => {
+        console.log(`Kingdom Sounds AI running on port ${PORT}`);
+    });
+}
+
+module.exports = app;
